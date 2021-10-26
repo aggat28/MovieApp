@@ -5,7 +5,8 @@ import App from './App';
 
 import { initializeApp } from "firebase/app";
 import UserContextProvider from './contexts/userContext.jsx';
-import LoaderContextProvider from './contexts/loaderContext';
+import LoaderContextProvider from './contexts/loaderContext.jsx';
+import ViewLaterContextProvider from './contexts/viewLaterContext.jsx'
 
 
 const firebaseConfig = {
@@ -24,9 +25,11 @@ const app = initializeApp(firebaseConfig);
 ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
-      <LoaderContextProvider>
-        <App />
-      </LoaderContextProvider>
+      <ViewLaterContextProvider>
+        <LoaderContextProvider>
+          <App />
+        </LoaderContextProvider>
+      </ViewLaterContextProvider>
     </UserContextProvider>
 
   </React.StrictMode >,
