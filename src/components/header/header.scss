@@ -1,0 +1,17 @@
+.navbar{
+
+    padding: 20px;
+    
+    #collasible-nav-dropdown{
+        transition: 0.1s;
+        
+        }
+    #collasible-nav-dropdown:hover {
+            color: red;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.1s;
+            
+        }
+    
+}
