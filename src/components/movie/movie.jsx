@@ -2,30 +2,41 @@ import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
 import './movie.scss';
 import { Modal, Button, Card, FormControl, InputGroup } from 'react-bootstrap';
-import {UserContext} from '../../contexts/userContext'
-
 import getFilmsInfo from "../../services/getFilmsInfo.js";
 import { Link } from 'react-router-dom';
+import {UserContext} from '../../contexts/userContext';
+import {ViewLaterContext} from '../../contexts/viewLaterContext';
 
 
  function Movie(movie){
     const {isLoginUser} = useContext(UserContext);
-    // const {setIsLoginUser} = useContext(UserContext);
+
+    const {setViewLater} = useContext(ViewLaterContext);
+    const {viewLater} = useContext(ViewLaterContext);
     
     const [show, setShow] = useState(false);
 
-    const handleCloseMovieInfo = () => setShow(false);
+    const handleCloseMovieInfo = () => {
+        setShowId(false);
+        setShow(false)};
     const handleShowMovieInfo = () => {
-    // console.log(movie.id);
         setShow(true)};
+
     const [film, setFilm] = useState('');
 
     useEffect(() => {
         getFilmsInfo(movie.id).then((data) => {
-            setFilm(data)
+            setFilm(data);
+            // console.log(data);
         })
     }, []);
 
+    const [showId, setShowId] = useState(false);
+
+    const handleViewLater = () => {
+        setViewLater([...viewLater, movie]);
+        setShowId(true);
+    }
 
     const IMG_API = "https://image.tmdb.org/t/p/w1280";
 
@@ -60,9 +71,14 @@ import { Link } from 'react-router-dom';
                             <Card.Text> {film.status}</Card.Text>
 
                             <Card.Title> runtime: </Card.Title>
-                            <Card.Text> {film.runtime} minutes</Card.Text>
-                            <Button variant="danger"> view later </Button>
+                            <Card.Text> {film.runtime} minutes </Card.Text>
 
+                             {
+                                isLoginUser? (
+                                <Button onClick={handleViewLater} variant="danger"> view later </Button>
+                                ) : ('')
+                            }
+              
                         </Card.Body> 
                     </div>               
                 </Card>
@@ -82,10 +98,7 @@ import { Link } from 'react-router-dom';
                     </Modal.Footer>
                 )
             }
-            
         </Modal>
-        
-      
     </>
     )
 }

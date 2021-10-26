@@ -4,10 +4,8 @@ import getFilmsByName from "../../services/getFilmsByName";
 import MoviesList from "../moviesList/moviesList";
 import Search from "../search/search.jsx";
 import PaginationPage from "../pagination/pagination.jsx";
-import Loader from 'react-loader-spinner';
 
 
-import './byRating.scss';
 import {LoaderContext} from "../../contexts/loaderContext";
 
 export default function ByRating() {
