@@ -6,8 +6,6 @@ import Search from "../search/search.jsx";
 import PaginationPage from "../pagination/pagination.jsx";
 
 
-
-import './byPopularity.scss';
 import {LoaderContext} from "../../contexts/loaderContext";
 
 export default function ByPopularity() {

@@ -36,8 +36,6 @@ export function Header() {
 
     }
     
-  
-
     return (
         <>
             <StylesNav>
@@ -84,15 +82,15 @@ export function Header() {
                                     </Link>
                                 </NavDropdown.Item>
                             </NavDropdown>
-                            {/* {
-                                isLoginUser? ( */}
+                            {
+                                isLoginUser? (
                                 <Nav.Link>
                                     <Link to="/viewLater">
                                         view later
                                     </Link>
                                 </Nav.Link>
-                                {/* ) : ('')
-                            } */}
+                                ) : ('')
+                            }
                         </Nav>
                         <Nav>
                            {
@@ -116,7 +114,6 @@ export function Header() {
                             </Button>
                           </>
                               )
-                            
                         } 
                         </Nav>
                     </Navbar.Collapse>

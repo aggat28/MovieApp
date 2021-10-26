@@ -21,11 +21,6 @@ import ViewLater from './components/viewLater/viewLater';
 
 
 function App() {
-//   const {user} = useContext(UserContext);
-//   console.log(user);
-//       const {isLoginUser} = useContext(UserContext);
-// console.log(isLoginUser);
-
 
   const {loader, isShowLoader} = useContext(LoaderContext)
 
