@@ -84,13 +84,15 @@ export function Header() {
                                     </Link>
                                 </NavDropdown.Item>
                             </NavDropdown>
-                            {
-                                isLoginUser? (<Nav.Link>
+                            {/* {
+                                isLoginUser? ( */}
+                                <Nav.Link>
                                     <Link to="/viewLater">
                                         view later
                                     </Link>
-                                </Nav.Link>) : ('')
-                            }
+                                </Nav.Link>
+                                {/* ) : ('')
+                            } */}
                         </Nav>
                         <Nav>
                            {
