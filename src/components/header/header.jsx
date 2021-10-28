@@ -19,7 +19,6 @@ const StylesNav = styled.div `
             text-transform: uppercase;
             transition: 0.1s;
         }
-        
     }
 `
 
@@ -120,6 +119,5 @@ export function Header() {
                 </Navbar>
             </StylesNav>
         </>
-
     )
 }

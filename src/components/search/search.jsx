@@ -8,7 +8,6 @@ export default function Search({handleEnter}) {
     
    const enterHandler = (e) => {
         if (e.key === 'Enter') {
-            console.log(search);
             handleEnter(search);
         }
     }

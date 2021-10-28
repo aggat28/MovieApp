@@ -1,3 +1,4 @@
+import React from 'react';
 import './input.scss';
 
 export default function Input({type = 'text', title='', styles="primary", value = '', handlerChange}){

@@ -7,12 +7,8 @@ import PaginationPage from "../pagination/pagination.jsx";
 import { useParams } from "react-router";
 import { LoaderContext } from "../../contexts/loaderContext";
 
-
-
-
 export default function ByYear( ) {
  
-
     const {yyyy} = useParams();
     const {setisShowLoader} = useContext(LoaderContext)
 
@@ -23,9 +19,7 @@ export default function ByYear( ) {
      useEffect(() => {
          if(yyyy) setYear(yyyy);
 
-         console.log('year : ', yyyy);
      }, [yyyy])
-
 
     const handlePrevPage = () => {
         if(page <= 1) return;
@@ -51,16 +45,13 @@ export default function ByYear( ) {
     const handleEnter = useCallback((search) => {
         if (!search.trim()) 
             return;
-        
-        // console.log(search);
-        // loader open
+ 
         getFilmsByName(search)
             .then(data => setMovies(data.results))
             .catch(error => {
                 console.log(error);
             })
             .finally(() => {
-                 // loader close
                 console.log('always');
             })
     }, [])
@@ -72,8 +63,7 @@ export default function ByYear( ) {
             {
             movies?.length ? (
                     <MoviesList movies={movies}/>
-                ) : (<></>
-)
+                ) : ('')
              } 
         </div>
         <PaginationPage handlePrevPage={handlePrevPage} handleNextPage={handleNextPage} />

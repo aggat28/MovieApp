@@ -1,4 +1,4 @@
-import './button.scss';
+import React from "react";
 
 
 export default function Button({styles, txt, handlerClick}){

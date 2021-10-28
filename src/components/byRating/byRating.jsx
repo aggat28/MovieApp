@@ -5,7 +5,6 @@ import MoviesList from "../moviesList/moviesList";
 import Search from "../search/search.jsx";
 import PaginationPage from "../pagination/pagination.jsx";
 
-
 import {LoaderContext} from "../../contexts/loaderContext";
 
 export default function ByRating() {
@@ -21,19 +20,17 @@ export default function ByRating() {
     }
     const handleNextPage = () => {
         setPage(page + 1);
-        
     }
 
     useEffect(() => {
         setisShowLoader(true)
         getFilmsByRating(page).then((data) => {
-            setMovies(data.results)
+            setMovies(data.results);
         })
         .catch(() => {
 
         })
         .finally(() => setisShowLoader(false))
-
 
     }, [page]);
 
@@ -61,10 +58,7 @@ export default function ByRating() {
             {
             movies?.length ? (
                     <MoviesList movies={movies}/>
-                ) : (
-                    <>
-                    </>
-                )
+                ) : ('')
              } 
         </div>
         <PaginationPage handlePrevPage={handlePrevPage} handleNextPage={handleNextPage} />

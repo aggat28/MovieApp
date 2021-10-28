@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
 
 .App{
-  padding-top: 100px;
-  box-sizing: border-box;
-  background-color: rgb(34, 29, 61);
-  position: relative;
-
+    padding-top: 6.25rem;
+    box-sizing: border-box;
+    background-color: rgb(34, 29, 61);
+    position: relative;
+    min-width: 350px;
     width: 100vw;
     margin: auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     height: auto;
-    font-family: "Karla";
+    font-family: "Karla", 'Courier New', Courier, monospace;
 }
