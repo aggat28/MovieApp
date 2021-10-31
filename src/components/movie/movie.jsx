@@ -1,20 +1,19 @@
 import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
 import './movie.scss';
-import { Modal, Button, Card, FormControl, InputGroup } from 'react-bootstrap';
+import { Modal, Button, Card} from 'react-bootstrap';
 import getFilmsInfo from "../../services/getFilmsInfo.js";
-import { Link } from 'react-router-dom';
 import {UserContext} from '../../contexts/userContext';
 import {ViewLaterContext} from '../../contexts/viewLaterContext';
-
+import pushViewLater from '../../services/viewLater/pushViewLater'
 
  function Movie(movie){
-    const {isLoginUser} = useContext(UserContext);
+    const {isLoginUser, user} = useContext(UserContext);
 
-    const {setViewLater} = useContext(ViewLaterContext);
-    const {viewLater} = useContext(ViewLaterContext);
-    
+    const {setViewLater, viewLater} = useContext(ViewLaterContext);
+     
     const [show, setShow] = useState(false);
+ 
 
     const handleCloseMovieInfo = () => {
         setShowId(false);
@@ -33,13 +32,54 @@ import {ViewLaterContext} from '../../contexts/viewLaterContext';
 
     const [showId, setShowId] = useState(false);
 
+
     const handleViewLater = () => {
-        setViewLater([...viewLater, movie]);
-        setShowId(true);
+
+        console.log(user.uid, movie.id);
+        const isExt = !!viewLater.find(vl => vl.id === movie.id);
+        if(isExt) {
+            // is exist
+            return;
+        }
+
+
+        pushViewLater({userId: user.uid, movieId: movie.id})
+            .then(() => {
+               
+                setViewLater([...viewLater, movie]);
+                setShowId(true);
+                console.log('push');
+
+            })
+            .catch(() => {
+                console.log('error');
+            })
+
     }
+    
+    // const handleDeleteViewLater = () => {
+    //     let item = JSON.parse(localStorage.getItem('view_later'));
+    //     console.log(item);
+    //     console.log(movie.id);
+    //     for(var i=0;i<item.length;i++)
+    //       {
+    //         if(item[i].id === movie.id)
+    //         {
+    //             item.splice(i,1);
+    //         setViewLater(item);
+
+    //           break;
+    //         }
+    //         console.log(item);
+    //         localStorage.setItem('view_later', JSON.stringify(viewLater));
+
+    //       }
+
+
+    // }
 
     const IMG_API = "https://image.tmdb.org/t/p/w1280";
-
+    
     return (
         <>
         <div className="movie" id={movie.id} onClick={handleShowMovieInfo}>
@@ -75,29 +115,17 @@ import {ViewLaterContext} from '../../contexts/viewLaterContext';
 
                              {
                                 isLoginUser? (
+                                    <>
                                 <Button onClick={handleViewLater} variant="danger"> view later </Button>
+                                {/* <Button onClick={handleDeleteViewLater} style={{marginLeft: '10px'}} variant="primary"> delete </Button> */}
+                                    </>
                                 ) : ('')
+
                             }
-              
                         </Card.Body> 
                     </div>               
                 </Card>
             </Modal.Body>
-            {
-                isLoginUser? (
-                <Modal.Footer>
-                    <InputGroup className="mb-1" size="lg">
-                        <FormControl as="textarea" aria-label="With textarea" />
-                    </InputGroup>
-                        <Button variant="secondary" id="button-addon2"> save comment </Button>
-                </Modal.Footer>
-                ) : (
-                    <Modal.Footer>
-                        <div>If you want to leave a comment, please 
-                        <Link to='/login'> log in </Link>.</div>
-                    </Modal.Footer>
-                )
-            }
         </Modal>
     </>
     )
