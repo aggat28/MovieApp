@@ -12,6 +12,7 @@ import ViewLaterContextProvider from './contexts/viewLaterContext.jsx'
 const firebaseConfig = {
   apiKey: "AIzaSyCzlt_djBB29XlbNI8ZZZ7nD1FRH4rJ1H0",
   authDomain: "movieapplogin-1b636.firebaseapp.com",
+  databaseURL: "https://movieapplogin-1b636-default-rtdb.europe-west1.firebasedatabase.app/",
   projectId: "movieapplogin-1b636",
   storageBucket: "movieapplogin-1b636.appspot.com",
   messagingSenderId: "500691862074",

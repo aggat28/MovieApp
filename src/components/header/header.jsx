@@ -31,7 +31,9 @@ export function Header() {
     const history = useHistory();
 
     const handleLogout = () => {
-        setIsLoginUser(false);
+        localStorage.removeItem('authUser');
+        setIsLoginUser(false);  
+
         history.push('/');
 
     }
@@ -96,9 +98,9 @@ export function Header() {
                            {
                                isLoginUser? (
                             <Button onClick={handleLogout} variant="danger" className="m-1">
-                                <Link to="/">
+                                
                                     log out
-                                </Link>
+                               
                             </Button>
                               ) : (
                                   <>

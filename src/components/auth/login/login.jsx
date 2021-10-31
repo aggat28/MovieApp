@@ -25,7 +25,9 @@ export default function Login(){
             .then(data => {
               console.log(data); 
               setuser(() =>  {return {...user, "token": data.user.uid}})
-
+                
+              localStorage.setItem('authUser', JSON.stringify({uid: data.user.uid}))
+              
               setIsLoginUser(true);
               history.push('/');
 

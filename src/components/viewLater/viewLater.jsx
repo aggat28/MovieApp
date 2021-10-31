@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import './viewLater.scss';
 import Movie from '../movie/movie';
 import {ViewLaterContext} from '../../contexts/viewLaterContext.jsx';
@@ -6,11 +6,21 @@ import {ViewLaterContext} from '../../contexts/viewLaterContext.jsx';
 
 export default function ViewLater() {
 
-    const {viewLater} = useContext(ViewLaterContext);
+
+    const {viewLater, setViewLater} = useContext(ViewLaterContext);
+
     localStorage.setItem('view_later', JSON.stringify(viewLater));
+
     
-    let movies = JSON.parse(localStorage.getItem('view_later'));
-    console.log(movies);
+        let movies = JSON.parse(localStorage.getItem('view_later'));
+        console.log(viewLater);
+        console.log(movies);
+
+        // if(movies)
+        // {
+        //     setViewLater({...viewLater, viewLater});
+        // }
+
 
     // function isAddedToCart(id) {
     //     console.log(id);
@@ -23,10 +33,6 @@ export default function ViewLater() {
             {
                 movies.map((movie) => {
                 return (
-
-
-                    // проверка на одиннаковые фильмы ???????
-
 
                     <Movie key={movie.id} {...movie}/>
                 )
