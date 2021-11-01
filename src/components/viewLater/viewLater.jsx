@@ -9,9 +9,6 @@ export default function ViewLater() {
 
     const {viewLater, setViewLater} = useContext(ViewLaterContext);
 
-    localStorage.setItem('view_later', JSON.stringify(viewLater));
-
-    
         let movies = JSON.parse(localStorage.getItem('view_later'));
         console.log(viewLater);
         console.log(movies);

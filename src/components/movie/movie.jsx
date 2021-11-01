@@ -42,11 +42,12 @@ import pushViewLater from '../../services/viewLater/pushViewLater'
             return;
         }
 
-
         pushViewLater({userId: user.uid, movieId: movie.id})
             .then(() => {
                
                 setViewLater([...viewLater, movie]);
+                localStorage.setItem('view_later', JSON.stringify(viewLater));
+
                 setShowId(true);
                 console.log('push');
 
