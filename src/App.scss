@@ -7,11 +7,11 @@
     position: relative;
     min-width: 350px;
     width: 100vw;
+    min-height: auto;
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: auto;
     font-family: "Karla", 'Courier New', Courier, monospace;
 }

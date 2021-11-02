@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
 import './movie.scss';
-import { Modal, Button, Card} from 'react-bootstrap';
+import { Modal, Button, Card, Form, FormControl, FloatingLabel} from 'react-bootstrap';
 import getFilmsInfo from "../../services/getFilmsInfo.js";
 import {UserContext} from '../../contexts/userContext';
 import {ViewLaterContext} from '../../contexts/viewLaterContext';
@@ -55,26 +55,36 @@ import pushViewLater from '../../services/viewLater/pushViewLater'
 
     }
     
-    // const handleDeleteViewLater = () => {
-    //     let item = JSON.parse(localStorage.getItem('view_later'));
-    //     console.log(item);
-    //     console.log(movie.id);
-    //     for(var i=0;i<item.length;i++)
-    //       {
-    //         if(item[i].id === movie.id)
-    //         {
-    //             item.splice(i,1);
-    //         setViewLater(item);
+    const handleDeleteViewLater = () => {
+        let item = JSON.parse(localStorage.getItem('view_later'));
+        console.log(item);
+        console.log(movie.id);
+        // for(var i=0;i<item.length;i++)
+        //   {
+        //     if(item[i].id === movie.id)
+        //     {
+        //         item.splice(i,1);
+        //     setViewLater(item);
 
-    //           break;
-    //         }
-    //         console.log(item);
-    //         localStorage.setItem('view_later', JSON.stringify(viewLater));
+        //       break;
+        //     }
+        //     console.log(item);
+        //     localStorage.setItem('view_later', JSON.stringify(viewLater));
 
-    //       }
+        //   }
+    }
+    
 
+    const [comment, setComment] = useState('');
+    const handleChangeComment = (e) => {
+        console.log(e.target.value);
+        setComment(e.target.value);
+    }
 
-    // }
+    const [pushComment, setPushComment] = useState([]);
+    const handlePushComment = () => {
+        setPushComment([...comment, comment]);
+    }
 
     const IMG_API = "https://image.tmdb.org/t/p/w1280";
     
@@ -90,14 +100,14 @@ import pushViewLater from '../../services/viewLater/pushViewLater'
             </div>
             
         </div>
-        <Modal show={show} onHide={handleCloseMovieInfo} size="lg" style={{minWidth: '427px'}}>
-            <Modal.Header closeButton style={{minWidth: '427px' }}>
+        <Modal show={show} onHide={handleCloseMovieInfo} size="lg" style={{minWidth: '300px'}}>
+            <Modal.Header closeButton style={{minWidth: '300px' }}>
                 <Modal.Title> {film.title} </Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{minWidth: '427px', maxWidth: '45rem' }} className="d-flex justify-content-space-between">
-                <Card style={{minWidth: '427px', maxWidth: '45rem', border: 'none' }} className="row d-flex justify-content-center align-items-center">
-                    <div className="d-flex justify-content-space-between" style={{minWidth: '427px', maxWidth: '45rem' }}>
-                        <Card.Img style={{minWidth: '250px', maxHeight: '420px' }} src={IMG_API + film.poster_path}  />
+            <Modal.Body style={{minWidth: '300px', maxWidth: '45rem' }} className="d-flex justify-content-space-between">
+                <Card style={{minWidth: '300px', maxWidth: '45rem', border: 'none' }} className="row d-flex justify-content-center align-items-center">
+                    <div className="d-flex justify-content-space-between" style={{minWidth: '300px', maxWidth: '45rem' }}>
+                        <Card.Img className="d-none d-lg-block" style={{minWidth: '250px', maxHeight: '420px' }} src={IMG_API + film.poster_path}  />
                         <Card.Body >
                             <Card.Title> overview: </Card.Title>
                             <Card.Text style={{textAlign: 'justify'}}> {film.overview} </Card.Text>
@@ -111,19 +121,42 @@ import pushViewLater from '../../services/viewLater/pushViewLater'
                             <Card.Title> runtime: </Card.Title>
                             <Card.Text> {film.runtime} minutes </Card.Text>
 
-                             {
-                                isLoginUser? (
-                                    <>
-                                <Button onClick={handleViewLater} variant="danger"> view later </Button>
-                                {/* <Button onClick={handleDeleteViewLater} style={{marginLeft: '10px'}} variant="primary"> delete </Button> */}
-                                    </>
-                                ) : ('')
-
-                            }
                         </Card.Body> 
                     </div>               
                 </Card>
+                
             </Modal.Body>
+
+                        {
+                        isLoginUser? (
+                                <div>
+                            <div className="d-flex justify-content-center" style={{width: '100%'}}>
+                                <Button onClick={handleViewLater} className="m-3" style={{width: '120px', height: '38px'}} variant="danger"> view later </Button>
+                                <Button onClick={handleDeleteViewLater}className="m-3" style={{width: '200px'}} variant="primary"> delete from view later </Button>
+                            </div>
+
+                                <FormControl          
+                                                    value={pushComment}
+                                                    as="textarea"
+                                                    placeholder="Your comment here"
+                                                    style={{ height: '90px', width: '98%', margin: 'auto' }}/>
+
+                                <Form.Group className="m-3" >
+                                    <FloatingLabel controlId="floatingTextarea2" label="Comment">
+                                        <FormControl 
+                                                    onChange={handleChangeComment}
+                                                    as="textarea"
+                                                    placeholder="Leave a comment here"
+                                                    style={{ height: '100px' }}/>
+                                    </FloatingLabel>
+                                    <div className="d-flex justify-content-end">
+                                        <Button onClick={handlePushComment} className="m-3" variant="secondary"> save comment </Button>
+                                    </div>
+                                </Form.Group>
+                                </div>
+                            ) : ('')
+                        }
+                        
         </Modal>
     </>
     )
