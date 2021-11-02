@@ -7,8 +7,6 @@ export default function ViewLaterContextProvider({children}){
 
     const [viewLater, setViewLater] = useState([]);
 
-    
-
     return (
         <ViewLaterContext.Provider value={{
             viewLater, setViewLater

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import './viewLater.scss';
 import Movie from '../movie/movie';
 import {ViewLaterContext} from '../../contexts/viewLaterContext.jsx';
@@ -6,13 +6,14 @@ import {ViewLaterContext} from '../../contexts/viewLaterContext.jsx';
 
 export default function ViewLater() {
 
+    const {viewLater} = useContext(ViewLaterContext);
+    localStorage.setItem('view_later', JSON.stringify(viewLater));
 
-    const {viewLater, setViewLater} = useContext(ViewLaterContext);
+    let movies = JSON.parse(localStorage.getItem('view_later')) || '';
 
-        let movies = JSON.parse(localStorage.getItem('view_later'));
-        console.log(viewLater);
-        console.log(movies);
 
+    console.log(movies);
+    console.log(viewLater);
         // if(movies)
         // {
         //     setViewLater({...viewLater, viewLater});
@@ -30,7 +31,6 @@ export default function ViewLater() {
             {
                 movies.map((movie) => {
                 return (
-
                     <Movie key={movie.id} {...movie}/>
                 )
                 })
